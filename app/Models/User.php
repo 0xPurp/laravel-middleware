@@ -11,6 +11,9 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    public function roles() {
+        return $this->belongsTo(Role::class, "role_id");
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -19,9 +22,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'firstname',
+        'age',
         'email',
+        'role_id',
         'password',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
